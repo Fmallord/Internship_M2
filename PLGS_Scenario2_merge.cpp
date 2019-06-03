@@ -27,7 +27,6 @@ auto constexpr rng_wsize = rng_type::word_size;
 
 
 
-
 auto file_exist( string const& file_name )
     -> bool
 {
