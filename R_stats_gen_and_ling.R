@@ -1,9 +1,4 @@
 ####################################################
-##### for linguistic variants (Maio & Santiago)
-#install.packages("WriteXLS")  # for large genetic tables, with thousands of rows bcz of SNPs
-library("WriteXLS")
-#install.packages('ggplot2')
-library('ggplot2')
 #install.packages("abcrf")
 library("abcrf")
 #install.packages("readxl")
@@ -150,9 +145,9 @@ modindex <- ind
 sumsta <- stat_final
 data1 <- data.frame(modindex, sumsta)
 model.rf1 <- abcrf(modindex~., data = data1, ntree=500, paral = TRUE, ncore = 40, lda=FALSE)
-model.rf1
+model.rf1 # confusion matrix
 
-pred = predict(model.rf1, real_data, data1, ntree = 500, paral = TRUE)
+pred = predict(model.rf1, real_data, data1, ntree = 500, paral = TRUE) # model choice
 
 
 
@@ -164,52 +159,9 @@ plot(stat_final.pca$x[,1], stat_final.pca$x[,2], col=ind, pch=3, cex=0.7, asp=1,
 legend(-15, -3, legend=c("stat_same_M1", "stat_same_M2", "stat_diff_M1", "stat_diff_M2"), col=c("blue", "green", "red", "orange"), pch=19, cex=0.9)
 
 
-temp1 <- predict(stat_final.pca,real_data)
+temp1 <- predict(stat_final.pca,real_data) # add real data to the PCA on simulated data
 points(temp1, col="black", pch=8, cex=1.5, lwd=3)
 
 GoodFit <- gfit(real_data, stat_final, nb.replicate= 1000, tol=0.0001)
 summary(GoodFit)
-plot(GoodFit)
-
-
-library("fields")
-t_col <- function(color, percent = 50, name = NULL) {
-  
-  #	  color = color name
-  #	percent = % transparency
-  #	   name = an optional name for the color
-  
-  ## Get RGB values for named color
-  rgb.val <- col2rgb(color)
-  
-  ## Make new color using input color as base and alpha set by transparency
-  t.col <- rgb(rgb.val[1], rgb.val[2], rgb.val[3],
-               max = 255,
-               alpha = (100-percent)*255/100,
-               names = name)
-  
-  ## Save the color
-  invisible(t.col)
-  
-}
-
-
-param2=param[stat_L_out_0__M1[,1],]
-param2=param2[7405:14808,]
-n0 <- param2$N0
-sumsta <- stat_diff_M2
-colnames(sumsta)=c("S", "meanD",  "varD" ,  "maxD" ,  "minD"  , "rangeD" ,"S.1"    ,  "meanD.1" , "varD.1" , "maxD.1"  , "minD.1" ,  "rangeD.1" ,"Fst" ,"S.2"  ,    "meanD.2" , "varD.2"  , "maxD.2"  , "minD.2"  , "rangeD.2" ,"meanR" , "varR"   ,"maxR"  , "minR"  , "rangeR" ,"S.3",  "meanD.3", "varD.3" ,  "maxD.3" ,  "minD.3" ,  "rangeD.3", "meanR.1" , "varR.1"  , "maxR.1"   ,"minR.1" ,  "rangeR.1" ,"Fst.1"   )
-sumsta[sumsta=="NaN"] <- -1
-data2 <- data.frame(n0, sumsta)
-data2[data2=="NaN"] <- -1
-model.rf.n0 <- regAbcrf(n0~., data2, ntree=500, paral = TRUE)
-model.rf.n0
-densityPlot(model.rf.n0, real_data, data2, main = "Posterior density for N0", xlab="N0", ylab="distribution of N0") # to see what the posterior prob look like
-############ pk undefined columns selected??? problem lié a param, mais si la j'ai raison de faire gaffe aux nsim, alors autre pgm ok? pk parfois indices se suivent d'autres non?
-pred.t = predict(model.rf.n0, real_data, data2)
-xline(x = pred.t$med[1], col="steelblue2", lwd=2)
-mycol <- t_col("lightblue", perc = 85, name = "lt.blue")
-polygon(border="lightskyblue", x=c(pred.t$quantiles[1], pred.t$quantiles[1], pred.t$quantiles[2], pred.t$quantiles[2]), y=c(-10e10, 10e10, 10e10, -10e10), col=mycol)
-xline(x = pred.t$expectation, col="red", lwd=2)
-
-
+plot(GoodFit) # to get gfit plot
