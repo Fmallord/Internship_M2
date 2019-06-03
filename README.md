@@ -1,4 +1,3 @@
-![#1589F0](https://placehold.it/15/1589F0/000000?text=+) `#1589F0`
 # Internship_M2
 ## Stores the relevant files and codes used during my M2 internship in the Musée de l'Homme, MNHN.
 ### Files and codes to get files done to run analyses:
@@ -10,7 +9,7 @@
 
 
 ### Codes to get results in the order of the "results" part in my report:
-- `#1589F0` <b>R_mantel_age.R</b> (correlations and Mantel tests WSD/age, ASD/age)
+- <b>R_mantel_age.R</b> (correlations and Mantel tests WSD/age, ASD/age)
 
 - R_Mantel_birthVSling.R (correlations and Mantel tests WSD/birthplace, WSD/residence place. Partial Mantel tests between WSD, birthplace and residence place)
 
@@ -19,7 +18,7 @@
 - R_gen_ling_mantel_genVS_words.R (correlation and Mantel test ASD/WSD. Partial Mantel test adjusting for the birthplace)
 
 - R_mantel_genVSbirthVSlivingplace.R (correlations and Mantel tests ASD/birthplace, WSD/residence place. Partial Mantel tests between ASD, birthplace and residence place)
-
+<p style='color:red'>This is some red text.</p>
 - R_mantel_genVSparentbirth.R (correlations and Mantel tests between ASD and each parental birthplace. Partial mantel tests betwen ASD and birthplace, adjusting for each parental birthplace)
 
 - R_MCA.R (MCA analyses and plot on linguistic data)
