@@ -145,11 +145,6 @@ for (i in 1:length(total$DNACode)) {    # chaque ind...
 }
 
 
-mantel.test(m_dist, m_dist_father_birth, nperm = 100000)
-mantel.test(m_dist, m_dist_mother_birth, nperm = 100000)
-plot(m_dist_father_birth, m_dist, pch=19, xlab="Distance between father birth places", ylab="Linguistic distance")
-plot(m_dist_mother_birth, m_dist, pch=19, xlab="Distance between mother birth places", ylab="Linguistic distance")
-
 library("ncf")
 partial.mantel.test(m_dist, m_dist_father_birth, m_dist_birth, resamp = 10000, method="spearman")   # mantel pour comparer la distance entre mots et la distance en âge (est-ce que gens plus éloignés en âge parlent plus différemment?)
 partial.mantel.test(m_dist, m_dist_mother_birth, m_dist_birth, resamp = 10000, method="spearman")   # mantel pour comparer la distance entre mots et la distance en âge (est-ce que gens plus éloignés en âge parlent plus différemment?)
