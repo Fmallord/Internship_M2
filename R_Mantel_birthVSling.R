@@ -3,6 +3,7 @@ library("readxl")
 library("stringr")
 #install.packages("ape") #to use mantel tests
 #install.packages("ncf") #to use partial mantel tests
+library("ncf")
 library("ape")
 #install.packages("geosphere")
 library("geosphere")
@@ -42,7 +43,7 @@ Birth=list(c_Boa_Vista, c_Brava, c_Fogo, c_Maio, c_Sal, c_Santiago, c_Santo_Anta
 ########## pour modifier en interne le dataframe total, en remplissant les trous par les coords des îles pr naissance et vie
 for (i in 1:length(total$DNACode)) {
   if (total$BirthPlaceLocX[i]=="?") {
-    for (j in 1:length(Birth)) {             #tjrs pb de levels, mais l'indiv n'est plus dans le tableau total
+    for (j in 1:length(Birth)) {        
       if (levels(total$BirthPlaceIsland)[j]==total$BirthPlaceIsland[i]) {
         total$BirthPlaceLocX[i]=Birth[[j]][1]
         total$BirthPlaceLocY[i]=Birth[[j]][2]
@@ -56,7 +57,7 @@ Living=list(c_Boa_Vista, c_Brava, c_Fogo, c_Santiago, c_Santo_Antao, c_Sao_Nicol
 
 for (i in 1:length(total$DNACode)) {
   if (total$LivingPlaceLocX[i]=="?") {
-    for (j in 1:length(Living)) {             #tjrs pb de levels, mais l'indiv n'est plus dans le tableau total
+    for (j in 1:length(Living)) {        
       if (levels(total$LivingPlaceIsland)[j]==total$LivingPlaceIsland[i]) {
         total$LivingPlaceLocX[i]=Living[[j]][1]
         total$LivingPlaceLocY[i]=Living[[j]][2]
@@ -109,14 +110,10 @@ for (i in 1:length(total$DNACode)) {    # chaque ind...
   }
 }
 
-mantel.test(m_dist, m_dist_birth, nperm = 100000)   # mantel de ape ici, a priori
-
 plot(m_dist_birth, m_dist, pch=19, xlab="Distance between birth places", ylab="Linguistic distance")
 
-library("ncf")
-partial.mantel.test(m_dist, m_dist_birth, m_dist_living, resamp = 10000, method="spearman")   # mantel pour comparer la distance entre mots et la distance en âge (est-ce que gens plus éloignés en âge parlent plus différemment?)
 
-library("ncf")
-mantel.test(m_dist, m_dist_birth, resamp = 100000)   # mantel pour comparer la distance entre mots et la distance en âge (est-ce que gens plus éloignés en âge parlent plus différemment?)
-mantel.test(m_dist, m_dist_living, resamp = 100000)   # mantel pour comparer la distance entre mots et la distance en âge (est-ce que gens plus éloignés en âge parlent plus différemment?)
+partial.mantel.test(m_dist, m_dist_birth, m_dist_living, resamp = 10000, method="spearman")
+mantel.test(m_dist, m_dist_birth, resamp = 100000) 
+mantel.test(m_dist, m_dist_living, resamp = 100000) 
 
