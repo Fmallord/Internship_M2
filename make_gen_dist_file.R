@@ -32,8 +32,9 @@ total=total[match(rownames(dist_gen), total$DNACode),]
 
 dist_genn=as.matrix(dist_gen)
 
+###################################### MDS analysis on ASD = dist_genn
 test1=cmdscale(dist_genn, k=5)
 
 a=dist(test1)
-b=as.matrix(a)
+b=as.matrix(a)  # ASD'
 write.table(b, "/media/fmallordy/DATA1/FMallordy/Figures_Paul/true_gen.txt") 
