@@ -1,3 +1,4 @@
+![#1589F0](https://placehold.it/15/1589F0/000000?text=+) `#1589F0`
 # Internship_M2
 ## Stores the relevant files and codes used during my M2 internship in the Musée de l'Homme, MNHN.
 ### Files and codes to get files done to run analyses:
@@ -9,7 +10,7 @@
 
 
 ### Codes to get results in the order of the "results" part in my report:
-- <b>R_mantel_age.R</b> (correlations and Mantel tests WSD/age, ASD/age)
+- `#1589F0` <b>R_mantel_age.R</b> (correlations and Mantel tests WSD/age, ASD/age)
 
 - R_Mantel_birthVSling.R (correlations and Mantel tests WSD/birthplace, WSD/residence place. Partial Mantel tests between WSD, birthplace and residence place)
 
