@@ -1,6 +1,6 @@
 ## Internship_M2
-#Stores the relevant files and codes used during my M2 internship in the Musée de l'Homme, MNHN.
-#Files and codes to get files done to run analyses:
+# Stores the relevant files and codes used during my M2 internship in the Musée de l'Homme, MNHN.
+# Files and codes to get files done to run analyses:
 - CapeVerde_PeoplingHistory_ABCpriors_RefTable_FM_jan2019.xlsx (file storing the demographic data we gathered and used to infer priors for our simulations with PLGS. All the data and references I personally found are in pale yellow cells)
 
 - make_files_for_Arlequin.R (Make files in a proper format to be used in Arlequin for AMOVA and Fst claculations)
@@ -8,7 +8,7 @@
 - make_gen_dist_files.R (To create ASD')
 
 
-#Codes to get results in the order of "results" part in my report:
+# Codes to get results in the order of "results" part in my report:
 - R_mantel_age.R (correlations and Mantel tests WSD/age, ASD/age)
 
 - R_Mantel_birthVSling.R (correlations and Mantel tests WSD/birthplace, WSD/residence place. Partial Mantel tests between WSD, birthplace and residence place)
