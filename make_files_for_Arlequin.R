@@ -17,7 +17,6 @@ names(a) <- c("BirthPlaceIsland", "BirthPlaceLocality")
 total=cbind(total, a)
 total$BirthPlaceLocality <- NULL
 
-#tronq=cbind(total[2:4], total[35:70]) #total avec que mots + cats intéressantes
 tronq=cbind(total[35:68])
 supertot <- data.frame(matrix(ncol = 34, nrow = 147))
 x <- names(total[35:68])
@@ -36,7 +35,6 @@ for (k in 1:length(supertot$green)) {  #pr chaque ind
 }
 }
 }
-
 
 write.xlsx(supertot, "/media/fmallordy/DATA1/FMallordy/Figures_Paul/ling_AMOVA/supertot_unaffiliated.xlsx") 
 
