@@ -3,7 +3,7 @@ library("readxl")
 #install.packages("geosphere")
 library("geosphere")
 library("stringr")
-detach("package:ncf", unload=TRUE)
+library("ncf")
 #install.packages("ape") #to use mantel tests
 library("ape")
 transcrs <- read.table("/media/fmallordy/DATA1/FMallordy/Figures_Paul/TranscriptSwadesh_List_CV2010-2018_TOTAL_PostProcValentin_FINAL_12022019_unaffiliated.txt", sep=";", header=TRUE, row.names = 1)
@@ -13,8 +13,6 @@ indivs=data.frame(indivs)
 transcrs=transcrs[(rownames(transcrs) %in% indivs$DNACode),]  # permet de filtrer les mots par les inds qu'on garde du tableau excel avant de tout merger dans un dataframe
 
 dist_gen <- read.table("/media/fmallordy/DATA1/FMallordy/Figures_Paul/true_gen.txt", header = TRUE)
-# dist_gen <- read.table("/media/fmallordy/DATA1/FMallordy/Figures_Paul/CapeVerde2010-2018_Omni25_PostQCstage3_no_monomorph_FINAL_Pruned50-10-0025.asd.dist", header = TRUE)
-
 transcrs$X <- NULL #retire label des indivs (pas de doublon)
 total=cbind(indivs, transcrs) #coller les df ensembles dans cet ordre
 
@@ -51,7 +49,7 @@ Birth=list(c_Boa_Vista, c_Brava, c_Fogo, c_Maio, c_Sal, c_Santiago, c_Santo_Anta
 ########## pour modifier en interne le dataframe total, en remplissant les trous par les coords des îles pr naissance et vie
 for (i in 1:length(total$DNACode)) {
   if (total$BirthPlaceLocX[i]=="?") {
-    for (j in 1:length(Birth)) {             #tjrs pb de levels, mais l'indiv n'est plus dans le tableau total
+    for (j in 1:length(Birth)) {            
       if (levels(total$BirthPlaceIsland)[j]==total$BirthPlaceIsland[i]) {
         total$BirthPlaceLocX[i]=Birth[[j]][1]
         total$BirthPlaceLocY[i]=Birth[[j]][2]
@@ -63,7 +61,7 @@ for (i in 1:length(total$DNACode)) {
 
 for (i in 1:length(total$DNACode)) {
   if (total$FatherBirthPlaceLocX[i]=="?") {
-    for (j in 1:length(Birth)) {             #tjrs pb de levels, mais l'indiv n'est plus dans le tableau total
+    for (j in 1:length(Birth)) {          
       if (levels(total$BirthPlaceIsland)[j]==total$FatherBirthPlaceIsland[i]) {
         total$FatherBirthPlaceLocX[i]=Birth[[j]][1]
         total$FatherBirthPlaceLocY[i]=Birth[[j]][2]
@@ -75,7 +73,7 @@ for (i in 1:length(total$DNACode)) {
 
 for (i in 1:length(total$DNACode)) {
   if (total$MotherBirthPlaceLocX[i]=="?") {
-    for (j in 1:length(Birth)) {             #tjrs pb de levels, mais l'indiv n'est plus dans le tableau total
+    for (j in 1:length(Birth)) {            
       if (levels(total$BirthPlaceIsland)[j]==total$MotherBirthPlaceIsland[i]) {
         total$MotherBirthPlaceLocX[i]=Birth[[j]][1]
         total$MotherBirthPlaceLocY[i]=Birth[[j]][2]
@@ -122,15 +120,6 @@ for (i in 1:length(total$DNACode)) {    # chaque ind...
   }
 }
 
-mantel.test(dist_genn, m_dist_father_birth, resamp = 10000)
-mantel.test(dist_genn, m_dist_mother_birth, resamp = 10000)
+partial.mantel.test(dist_genn, m_dist_birth, m_dist_father_birth, resamp = 10000, method="spearman")   
 
-plot(m_dist_father_birth, dist_genn, pch=19, xlab="Distance between father birth places", ylab="Genetic distance")
-plot(m_dist_mother_birth, dist_genn, pch=19, xlab="Distance between mother birth places", ylab="Genetic distance")
-
-library("ncf")
-partial.mantel.test(dist_genn, m_dist_birth, m_dist_father_birth, resamp = 10000, method="spearman")   # mantel pour comparer la distance entre mots et la distance en âge (est-ce que gens plus éloignés en âge parlent plus différemment?)
-
-partial.mantel.test(dist_genn, m_dist_birth, m_dist_mother_birth, resamp = 10000, method="spearman")   # mantel pour comparer la distance entre mots et la distance en âge (est-ce que gens plus éloignés en âge parlent plus différemment?)
-
-
+partial.mantel.test(dist_genn, m_dist_birth, m_dist_mother_birth, resamp = 10000, method="spearman")  
