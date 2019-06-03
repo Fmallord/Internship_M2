@@ -8,8 +8,6 @@ indivs <- read_excel("/media/fmallordy/DATA1/FMallordy/Figures_Paul/FamQuest_Cap
 indivs=data.frame(indivs)
 
 dist_gen <- read.table("/media/fmallordy/DATA1/FMallordy/Figures_Paul/true_gen.txt", header = TRUE)
-# dist_gen <- read.table("/media/fmallordy/DATA1/FMallordy/Figures_Paul/CapeVerde2010-2018_Omni25_PostQCstage3_no_monomorph_FINAL_Pruned50-10-0025.asd.dist", header = TRUE)
-
 transcrs$X <- NULL #retire label des indivs (pas de doublon)
 total=cbind(indivs, transcrs) #coller les df ensembles dans cet ordre
 
@@ -59,10 +57,6 @@ for (i in 1:length(total$DNACode)) {    # chaque ind...
         }
 }
 
-mantel.test(m_dist, m_age, nperm = 100000)   # mantel pour comparer la distance entre mots et la distance en âge (est-ce que gens plus éloignés en âge parlent plus différemment?)
-
 library("ncf")
-mantel.test(m_dist, m_age, resamp = 100000)   # mantel pour comparer la distance entre mots et la distance en âge (est-ce que gens plus éloignés en âge parlent plus différemment?)
-mantel.test(dist_genn, m_age, resamp = 10000)   # mantel pour comparer la distance entre mots et la distance en âge (est-ce que gens plus éloignés en âge parlent plus différemment?)
-
-plot(m_age, m_dist, pch=19, xlab="Distance in age", ylab="Linguistic distance")
+mantel.test(m_dist, m_age, resamp = 100000)   # mantel pour comparer la distance lingusitique et la distance en âge (est-ce que gens plus éloignés en âge parlent plus différemment?)
+mantel.test(dist_genn, m_age, resamp = 10000)   # mantel pour comparer la distance génétique et la distance en âge (est-ce que gens plus éloignés en âge sont plus différents génétiquement?)
