@@ -8,7 +8,7 @@
 - make_gen_dist_files.R (To create ASD')
 
 
-### Codes to get results in the order of "results" part in my report:
+### Codes to get results in the order of the "results" part in my report:
 - R_mantel_age.R (correlations and Mantel tests WSD/age, ASD/age)
 
 - R_Mantel_birthVSling.R (correlations and Mantel tests WSD/birthplace, WSD/residence place. Partial Mantel tests between WSD, birthplace and residence place)
