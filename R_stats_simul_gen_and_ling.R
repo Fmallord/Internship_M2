@@ -149,9 +149,6 @@ model.rf1 # confusion matrix
 
 pred = predict(model.rf1, real_data, data1, ntree = 500, paral = TRUE) # model choice
 
-
-
-
 stat_final.pca <- prcomp(~ ., data=stat_final, center = TRUE, scale = TRUE)  # là ou on fait les data PCA
 summary(stat_final.pca)
 plot(stat_final.pca$x[,1], stat_final.pca$x[,2], col=ind, pch=3, cex=0.7, asp=1, xlab="PC1", ylab="PC2")    
