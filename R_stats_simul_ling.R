@@ -101,9 +101,9 @@ modindex <- ind
 sumsta <- stat_final
 data1 <- data.frame(modindex, sumsta)
 model.rf1 <- abcrf(modindex~., data = data1, ntree=500, paral = TRUE, ncore = 40, lda=FALSE)
-model.rf1
+model.rf1 # confusion matrix
 
-pred = predict(model.rf1, real_data, data1, ntree = 500, paral = TRUE)
+pred = predict(model.rf1, real_data, data1, ntree = 500, paral = TRUE) # model choice
 
 param2 = param[stat_L_out_0__M1[,1],]
 # pour un paramètre (temps t_MA_b), ou on regarde les quantiles
@@ -115,21 +115,11 @@ model.rf.t <- regAbcrf(t~., data2, ntree=500, paral = TRUE)
 model.rf.t
 
 pred2 = predict(model.rf.t, real_data, data2)
-
-# same_M1.pca <- prcomp(~ ., data=stat_same_M1[2:17], center = TRUE, scale = TRUE)  # là ou on fait les data PCA
-# summary(same_M1.pca)
-# same_M2.pca <- prcomp(~ ., data=stat_same_M2[2:17], center = TRUE, scale = TRUE)  # là ou on fait les data PCA
-# summary(same_M2.pca)
-# diff_M1.pca <- prcomp(~ ., data=stat_diff_M1[2:17], center = TRUE, scale = TRUE)  # là ou on fait les data PCA
-# summary(diff_M1.pca)
-# diff_M2.pca <- prcomp(~ ., data=stat_diff_M2[2:17], center = TRUE, scale = TRUE)  # là ou on fait les data PCA
-# summary(diff_M2.pca)
-
 stat_final.pca <- prcomp(~ ., data=stat_final, center = TRUE, scale = TRUE)  # là ou on fait les data PCA
 summary(stat_final.pca)
 plot(stat_final.pca$x[,1], stat_final.pca$x[,2], col=ind, pch=19, asp=1, xlab="PC1", ylab="PC2")    
 
-temp1 <- predict(stat_final.pca,real_data)
+temp1 <- predict(stat_final.pca,real_data) # place les données réelles dans la PCA des simulations
 points(temp1, col="yellow", pch=8, cex=2, lwd=3)
 
 ################################## Goodness of Fit 19 stats maio -> Prior Error Check
@@ -145,7 +135,7 @@ head(stattemp)
 
 GoodFit <- gfit(real_data, stat_final, nb.replicate= 1000, tol=0.0001)
 summary(GoodFit)
-plot(GoodFit)
+plot(GoodFit) # to get gfit plots
 ################################# Comparison; prior vs posterior data
 #install.packages("fields")
 library("fields")
@@ -168,7 +158,7 @@ t_col <- function(color, percent = 50, name = NULL) {
   invisible(t.col)
   
 }
-
+######################################## to get posterior vs prior distributions plotted  + quantiles of posteriors
 pred.t = predict(model.rf.t, real_data, data2)
 densityPlot(model.rf.t, kernel = c("epanechnikov"), from=241, to=815, real_data, data2, main = "Posterior density for t_MA_b", xlab="t_MA_b", ylab="distribution of t_MA_b") # to see what the posterior prob look like
 xline(x = pred.t$med[1], col="steelblue2", lwd=2)
@@ -351,7 +341,6 @@ data2 <- data.frame(g_mut, sumsta)
 model.rf.g_mut <- regAbcrf(g_mut~., data2, ntree=500, paral = TRUE)
 model.rf.g_mut
 densityPlot(model.rf.g_mut, real_data, data2, main = "Posterior density for G_mut", xlab="G_mut", ylab="distribution of G_mut") # to see what the posterior prob look like
-#densityPlot(model.rf.g_mut, real_data, data2, xlim=c(1e-10, 1e-7), log="x", main = "Posterior density for G_mut", xlab="G_mut", ylab="distribution of G_mut") # to see what the posterior prob look like
 pred.t = predict(model.rf.g_mut, real_data, data2)
 xline(x = pred.t$med[1], col="steelblue2", lwd=2)
 mycol <- t_col("lightblue", perc = 85, name = "lt.blue")
