@@ -44,7 +44,7 @@ int main()
 
         //
         uniform_real_distribution<> rng_n_Rl(0,2);
-	auto n_Rl = size_t(n_Rg * pow(10, rng_n_Rl(rng)));                //jusque là pr l'instant
+	auto n_Rl = size_t(n_Rg * pow(10, rng_n_Rl(rng))); 
 
 	// population sizes. //////////////////////////////
 	uniform_real_distribution<> rng_N0_ind(1,3);
