@@ -20,7 +20,7 @@ total=cbind(total, a)
 total$BirthPlaceLocality <- NULL
 
 
-######################### MDS
+######################### MCA
 
 transcrs.MCA <- MCA(transcrs[,1:34], na.method = "Average")
 summary(transcrs.MCA, ncp=3) #résumé des stats résumées, par défaut sur 10 variables/individus, et 3 dimensions de coords pour catég variables
@@ -36,10 +36,7 @@ col6=rgb(0.94921875,	0.5703125,	0.0000000) #Brava
 col7=rgb(0.937254902,	0.450980392,	0.835294118) #Sal
 col8=rgb(0.91372549,	0.352941176,	0.047058824) #Maio
 col9=rgb(0.61176471,	0.258823529,	0.917647059) #BoaVista
-col10=rgb(0.792156863,	0.729411765,	0.623529412) #SaoTomé
-col11=rgb(0.6, 1, 0.5) # France
-#couleurs_base=c(col9, col6, col5, col8, col7, col2, col1, col3, col4) #pour qd c'est en levels
-couleurs_base=c(col2, col4, col1, col6, col5, col9, col3, col8, col7)  # pr quand c'est unique
+couleurs_base=c(col2, col4, col1, col6, col5, col9, col3, col8, col7)
 couleur=vector("character", length=length(total$DNACode))
 for (i in 1:length(total$DNACode)) {
   for (j in 1:length(unique(total$BirthPlaceIsland))) {
@@ -49,7 +46,6 @@ for (i in 1:length(total$DNACode)) {
   }
 }
 test1=cbind(couleur, test1)
-##### end of color part
 
 #to plot MCA by indivs
 plot(transcrs.MCA$ind$coord[,1], transcrs.MCA$ind$coord[,2], main="MCA representation by individuals", xlab="Dim 1", ylab="Dim 2", pch = 19, col=test1[,1], asp=1)
