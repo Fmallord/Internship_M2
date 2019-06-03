@@ -24,7 +24,6 @@ stat_L_out_1__M1 <- read.table("/media/fmallordy/DATA1/FMallordy/files_CV_2019/C
 stat_L_out_0_1__M2 <- read.table("/media/fmallordy/DATA1/FMallordy/files_CV_2019/C++/Maio2_better/Maio2_better_stock/stat_L_out_0_1", header=TRUE)
 stat_L_out_0__M2 <- read.table("/media/fmallordy/DATA1/FMallordy/files_CV_2019/C++/Maio2_better/Maio2_better_stock/stat_L_out_0", header=TRUE)
 stat_L_out_1__M2 <- read.table("/media/fmallordy/DATA1/FMallordy/files_CV_2019/C++/Maio2_better/Maio2_better_stock/stat_L_out_1", header=TRUE)
-
 real_data = cbind(stat_L_Santiago, stat_L_Maio, stat_L_pairwise)
 
 ################################# ORDONNER LES DONNÉES POUR LES COMPARER AU MIEUX ##################
