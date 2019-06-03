@@ -140,7 +140,6 @@ ind4 = matrix("orange",dim(stat_diff_M2)[1],1)
 
 ind = as.factor(c(ind1, ind2, ind3, ind4))
 
-
 modindex <- ind
 sumsta <- stat_final
 data1 <- data.frame(modindex, sumsta)
