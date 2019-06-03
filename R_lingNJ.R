@@ -1,7 +1,7 @@
 #install.packages("ape")
 library("ape")
 
-###############################
+##############################
 ##### heatmap and neighbour joining tree on the matrix of Fst coefficient between 2 Birth islands from Arlequin
 
 Names=c("Brava", "Fogo", "Santiago", "Maio", "Sal", "BoaVista", "SaoNicolau", "SaoVicente", "SantoAntao")
