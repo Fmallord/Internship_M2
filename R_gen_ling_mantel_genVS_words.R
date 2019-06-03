@@ -25,17 +25,7 @@ a=data.frame(str_split_fixed(total$BirthPlaceLoc, " - ", 2))
 names(a) <- c("BirthPlaceIsland", "BirthPlaceLocality")
 total=cbind(total, a)
 total$BirthPlaceLocality <- NULL
-
-# dist_gen <- dist_gen[,(colnames(dist_gen) %in% total$DNACode)]
-# dist_gen <- dist_gen[(rownames(dist_gen) %in% total$DNACode),]
-# 
 total=total[match(rownames(dist_gen), total$DNACode),]
-
-# dist_genn=as.matrix(dist_gen)
-
-
-
-
 
 
 ## pour tous les mots
@@ -57,7 +47,6 @@ for (i in 1:length(total$DNACode)) {    # chaque ind...
 m_dist <- m_dist/34                   # pour passer à une matrice en proportion de dissimilarité
 
 ###############################
-## autres tests de Mantel à faire
 
 c_Brava=c(-24.7, 14.8666667)
 c_Fogo=c(-24.383055555555558, 14.9330556)
@@ -74,7 +63,7 @@ Birth=list(c_Boa_Vista, c_Brava, c_Fogo, c_Maio, c_Sal, c_Santiago, c_Santo_Anta
 ########## pour modifier en interne le dataframe total, en remplissant les trous par les coords des îles pr naissance et vie
 for (i in 1:length(total$DNACode)) {
   if (total$BirthPlaceLocX[i]=="?") {
-    for (j in 1:length(Birth)) {             #tjrs pb de levels, mais l'indiv n'est plus dans le tableau total
+    for (j in 1:length(Birth)) {       
       if (levels(total$BirthPlaceIsland)[j]==total$BirthPlaceIsland[i]) {
         total$BirthPlaceLocX[i]=Birth[[j]][1]
         total$BirthPlaceLocY[i]=Birth[[j]][2]
@@ -103,5 +92,4 @@ mantel.test(dist_gen, m_dist, nperm = 10000)   # mantel de ape ici, a priori
 plot(as.matrix(dist_gen), m_dist, pch=19, xlab="Genetic distance", ylab="Linguistic distance")
 
 library("ncf")
-partial.mantel.test(as.matrix(dist_gen), m_dist, m_dist_birth, resamp = 10000, method="spearman")   # mantel pour comparer la distance entre mots et la distance en âge (est-ce que gens plus éloignés en âge parlent plus différemment?)
-
+partial.mantel.test(as.matrix(dist_gen), m_dist, m_dist_birth, resamp = 10000, method="spearman")
